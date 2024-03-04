@@ -1,8 +1,9 @@
 import {NextFunction, Request, Response} from "express";
-import {Folder} from "../postman/decorators/folder";
-import {Postman} from "../postman/postman";
-import {Get} from "../postman/decorators/methods";
-import env from "../helpers/env";
+import {Folder} from "../../postman/decorators/folder";
+import {Postman} from "../../postman/postman";
+import {Get} from "../../postman/decorators/methods";
+import env from "../../helpers/env";
+import {formatDate} from "../../helpers/date";
 
 @Folder('Postman', 'postman')
 export default class PostmanController {
@@ -15,8 +16,8 @@ export default class PostmanController {
           info: {
             name: env('APP_NAME'),
             schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
-            createdAt: new Date(),
-            updatedAt: new Date()
+            createdAt: formatDate(new Date()),
+            updatedAt: formatDate(new Date())
           },
           item: [],
           variable: [
@@ -29,7 +30,7 @@ export default class PostmanController {
         }
       }
 
-      await Postman.generate('./src/controllers/', result.collection.item)
+      await Postman.generate('./src/http/controllers/', result.collection)
 
 
       return res.send(result)

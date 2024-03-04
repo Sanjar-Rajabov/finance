@@ -1,18 +1,19 @@
 import {Router} from "express";
-import WalletController from "../controllers/api/wallet.controller";
+import WalletController from "../http/controllers/api/wallet.controller";
 import {createValidator} from "express-joi-validation";
-import {getByIdJoi, paginationJoi} from "../validation/common-validations";
-import {createWalletJoi, updateWalletJoi} from "../validation/wallet";
+import {getByIdJoi, paginationJoi} from "../http/validation/common-validations";
+import {createWalletJoi, updateWalletJoi} from "../http/validation/wallet";
 
-const walletRouter = Router()
-const validator = createValidator({
-  passError: true
-});
+export function walletRouter(app: Router) {
+  const validator = createValidator({
+    passError: true
+  });
 
-walletRouter.get('', validator.params(paginationJoi), WalletController.getAll)
-walletRouter.get('/:id', validator.params(getByIdJoi), WalletController.getOne)
-walletRouter.post('', validator.body(createWalletJoi), WalletController.create)
-walletRouter.post('/:id', validator.params(getByIdJoi), validator.body(updateWalletJoi), WalletController.update)
-walletRouter.delete('/:id', validator.params(getByIdJoi), WalletController.delete)
+  app.get('', validator.params(paginationJoi), WalletController.getAll)
+  app.get('/:id', validator.params(getByIdJoi), WalletController.getOne)
+  app.post('', validator.body(createWalletJoi), WalletController.create)
+  app.post('/:id', validator.params(getByIdJoi), validator.body(updateWalletJoi), WalletController.update)
+  app.delete('/:id', validator.params(getByIdJoi), WalletController.delete)
 
-export default walletRouter
+  return app
+}

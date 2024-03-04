@@ -12,5 +12,6 @@ export enum MetadataKeys {
   Prefix = 'prefix',
   Body = 'body',
   BodyMode = 'body-mode',
+  Description = 'description',
   Response = 'response'
 }
