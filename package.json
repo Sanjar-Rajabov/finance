@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "npx tsc",
-    "start": "ts-node src/app.ts",
+    "start": "node dist/app.js",
     "dev": "nodemon src/app.ts"
   },
   "dependencies": {
