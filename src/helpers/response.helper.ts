@@ -2,6 +2,13 @@ import {Response} from "express";
 import {getReasonPhrase, StatusCodes} from "http-status-codes";
 
 export class ResponseHelper {
+
+  static async catchError(res: Response, error: any) {
+    let statusCode = error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR
+
+    return ResponseHelper.error(res, error.message ?? getReasonPhrase(statusCode), statusCode)
+  }
+
   static success(res: Response, data: any = null, statusCode: StatusCodes = StatusCodes.OK) {
     return res.status(statusCode).json(ResponseHelper.successObject(data, statusCode))
   }

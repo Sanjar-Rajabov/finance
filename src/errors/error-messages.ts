@@ -7,4 +7,5 @@ export enum ErrorMessages {
   requestedMethodNotFound = 'requested method not found',
   internal = 'internal server error',
   invalidLoginOrPassword = 'invalid login or password',
+  insufficientFundsOnBalance = 'insufficient funds on balance'
 }
