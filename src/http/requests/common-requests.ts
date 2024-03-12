@@ -1,4 +1,5 @@
 import {Request} from 'express'
+import * as core from "express-serve-static-core";
 
 interface GetByIdRequest extends Request {
   params: {
@@ -6,6 +7,10 @@ interface GetByIdRequest extends Request {
   },
 }
 
+export interface PaginationRequest extends core.Query {
+  limit: string,
+  page: string
+}
 
 export {
   GetByIdRequest
