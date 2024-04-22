@@ -1,14 +1,16 @@
 import Joi from "joi";
 
-const getByIdJoi = Joi.object({
+export const getOneValidation: Joi.ObjectSchema = Joi.object({
   id: Joi.number().required()
 })
 
-const paginationJoi = Joi.object({
+export const paginationValidation: Joi.ObjectSchema = Joi.object({
   page: Joi.number().min(0).optional(),
-  perPage: Joi.number().min(0).optional()
+  limit: Joi.number().min(0).optional()
 })
 
-export {
-  getByIdJoi, paginationJoi
-}
+export const localizedObjectValidation: Joi.ObjectSchema = Joi.object({
+  ru: Joi.string().required(),
+  uz: Joi.string().required(),
+  en: Joi.string().required()
+})

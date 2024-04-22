@@ -1,0 +1,11 @@
+{
+  "validation error": "validatsiya xatosi",
+  "transaction not found": "tranzaksiya topilmadi",
+  "transaction already exists": "tranzaksiya allaqachon mavjud",
+  "transaction already canceled": "tranzaksiya allaqachon bekor qilingan",
+  "client not found": "mijoz topilmadi",
+  "requested method not found": "so'ralgan usul topilmadi",
+  "internal server error": "server ichki xatosi",
+  "invalid login or password": "login yoki parol noto'g'ri",
+  "insufficient client funds for payment cancellation": "to'lovni bekor qilish uchun mijoz mablag'larining yetarligi"
+}

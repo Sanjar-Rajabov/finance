@@ -1,0 +1,11 @@
+{
+  "validation error": "ошибка валидации",
+  "transaction not found": "транзакция не найдена",
+  "transaction already exists": "транзакция уже существует",
+  "transaction already canceled": "транзакция уже отменена",
+  "client not found": "клиент не найден",
+  "requested method not found": "запрашиваемый метод не найден",
+  "internal server error": "внутренняя ошибка сервера",
+  "invalid login or password": "неверный логин или пароль",
+  "insufficient client funds for payment cancellation": "недостаточно средств у клиента для отмены платежа"
+}

@@ -1,0 +1,11 @@
+{
+  "validation error": "validation error",
+  "transaction not found": "transaction not found",
+  "transaction already exists": "transaction already exists",
+  "transaction already canceled": "transaction already canceled",
+  "client not found": "client not found",
+  "requested method not found": "requested method not found",
+  "internal server error": "internal server error",
+  "invalid login or password": "invalid login or password",
+  "insufficient client funds for payment cancellation": "insufficient client funds for payment cancellation"
+}

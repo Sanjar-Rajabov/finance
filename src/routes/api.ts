@@ -1,5 +1,5 @@
 import express, {Request, Response, Router} from "express"
-import {walletRouter} from "./wallet.router";
+import {walletRouter} from "./frontend/wallet.router";
 import {errorHandler} from "../http/middleware/error.handler";
 import {ResponseHelper} from "../helpers/response.helper";
 

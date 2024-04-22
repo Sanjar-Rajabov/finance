@@ -1,8 +1,15 @@
-import {NextFunction, Request, Response} from "express";
+import {Response} from "express";
 import {ResponseHelper} from "../../../helpers/response.helper";
 import Wallet from "../../../database/entities/wallet";
 import {WalletCreateRequest, WalletUpdateRequest} from "../../requests/wallet.request";
-import {GetByIdRequest} from "../../requests/common-requests";
+import {
+  GetByIdRequest,
+  GetOneRequest,
+  PaginationRequest,
+  ValidatedBodyRequest,
+  ValidatedParamsRequest,
+  ValidatedQueryRequest
+} from "../../requests/common-requests";
 import {Delete, Get, Post, Put} from "../../../postman/decorators/methods";
 import {Folder} from "../../../postman/decorators/folder";
 import {AuthBearer} from "../../../postman/decorators/auth-bearer";
@@ -14,6 +21,9 @@ import {ResponseOk} from "../../../postman/defaults/response-ok";
 import {ResponseCreated} from "../../../postman/defaults/response-created";
 import {ResponseEmpty} from "../../../postman/defaults/response-empty";
 import {Description} from "../../../postman/decorators/description";
+import {validate} from "../../validation/validate";
+import {getOneValidation, paginationValidation} from "../../validation/common-validations";
+import {walletValidation} from "../../validation/wallet";
 
 @Folder('Wallet')
 @AuthBearer()
@@ -24,25 +34,33 @@ export default class WalletController {
   @PaginationQuery()
   @PaginationResponse(new WalletDto)
   @Description('test method desc')
-  static async getAll(req: Request, res: Response) {
-    const wallets = await Wallet.find()
+  static async getAll(req: ValidatedQueryRequest<PaginationRequest>, res: Response) {
+    try {
+      validate(paginationValidation, req.query)
 
-    return ResponseHelper.success(res, wallets)
+      const wallets: Wallet[] = await Wallet.find()
+
+      return ResponseHelper.success(res, wallets)
+    } catch (error) {
+      return ResponseHelper.catchError(res, error)
+    }
   }
 
   @Get('/:id')
   @ResponseOk(new WalletDto)
-  static async getOne(req: GetByIdRequest, res: Response, next: NextFunction) {
+  static async getOne(req: ValidatedParamsRequest<GetOneRequest>, res: Response) {
     try {
-      const wallet = await Wallet.findOneOrFail({
+      validate(getOneValidation, req.params)
+
+      const wallet: Wallet = await Wallet.findOneOrFail({
         where: {
           id: +req.params.id
         }
       });
 
-      ResponseHelper.success(res, wallet);
+      return ResponseHelper.success(res, wallet);
     } catch (error) {
-      next(error)
+      return ResponseHelper.catchError(res, error)
     }
   }
 
@@ -52,14 +70,16 @@ export default class WalletController {
     balance: 0
   })
   @ResponseCreated(new WalletDto())
-  static async create(req: WalletCreateRequest, res: Response, next: NextFunction) {
+  static async create(req: ValidatedBodyRequest<WalletCreateRequest>, res: Response) {
     try {
-      const wallet = Wallet.create({...req.body})
+      validate(walletValidation, req.body)
+
+      const wallet: Wallet = Wallet.create({...req.body})
       await wallet.save()
 
       return ResponseHelper.success(res, wallet)
     } catch (error) {
-      next(error)
+      return ResponseHelper.catchError(res, error)
     }
   }
 
@@ -69,9 +89,11 @@ export default class WalletController {
     balance: 0
   }, 'formdata')
   @ResponseOk(new WalletDto)
-  static async update(req: WalletUpdateRequest, res: Response, next: NextFunction) {
+  static async update(req: ValidatedBodyRequest<WalletUpdateRequest>, res: Response) {
     try {
-      const wallet = await Wallet.findOneByOrFail({
+      validate(walletValidation, req.body)
+
+      const wallet: Wallet = await Wallet.findOneByOrFail({
         id: +req.params.id
       })
 
@@ -81,15 +103,17 @@ export default class WalletController {
 
       return ResponseHelper.success(res, wallet)
     } catch (error) {
-      next(error)
+      return ResponseHelper.catchError(res, error)
     }
   }
 
   @Delete('/:id')
   @ResponseEmpty()
-  static async delete(req: GetByIdRequest, res: Response, next: NextFunction) {
+  static async delete(req: GetByIdRequest, res: Response) {
     try {
-      const wallet = await Wallet.findOneByOrFail({
+      validate(getOneValidation, req.params)
+
+      const wallet: Wallet = await Wallet.findOneByOrFail({
         id: +req.params.id
       });
 
@@ -97,7 +121,7 @@ export default class WalletController {
 
       return ResponseHelper.success(res, null);
     } catch (error) {
-      next(error);
+      return ResponseHelper.catchError(res, error);
     }
   }
 }
