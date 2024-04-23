@@ -1,10 +1,15 @@
 import * as messages from './messages'
 import {Locale} from "../structures/locale";
+import {getAppLocale} from "../config/locale";
 
 export function getLocalizedErrorMessage(key: string, replace: {
   [key: string]: any
-} = {}, locale: Locale = 'ru'): string {
+} = {}, locale: Locale | null = null): string {
   const keys: string[] = key.split('.')
+
+  if (!locale) {
+    locale = getAppLocale()
+  }
 
   let value: any = messages[locale]
 

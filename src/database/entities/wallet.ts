@@ -1,14 +1,9 @@
-import {BaseEntity, Column, CreateDateColumn, Entity, Generated, PrimaryColumn, UpdateDateColumn} from "typeorm";
-import {bigintToNumber} from "../transformer/bigint-to-number";
+import {Column, CreateDateColumn, Entity, UpdateDateColumn} from "typeorm";
 import {dateIsoToDatetime} from "../transformer/date-iso-to-datetime";
+import {BaseEntity} from "./base-entity";
 
 @Entity()
-class Wallet extends BaseEntity {
-  @Generated("increment")
-  @PrimaryColumn({
-    transformer: bigintToNumber
-  })
-  id: number
+export default class Wallet extends BaseEntity {
 
   @Column({type: 'varchar', length: 100, nullable: false, default: null})
   name: string
@@ -26,5 +21,3 @@ class Wallet extends BaseEntity {
   })
   updated_at: Date
 }
-
-export default Wallet
