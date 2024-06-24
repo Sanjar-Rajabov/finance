@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {ResponseHelper} from "../../../helpers/response.helper";
+import {ResponseHelper} from "../../../utils/response.helper";
 import Wallet from "../../../database/entities/wallet";
 import {WalletCreateRequest, WalletUpdateRequest} from "../../requests/wallet.request";
 import {

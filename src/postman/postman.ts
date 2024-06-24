@@ -8,7 +8,7 @@ import {postmanUrlGenerator} from "./helpers/postman-url.generator";
 import {postmanBodyGenerator} from "./helpers/postman-body.generator";
 import {postmanHeaderGenerator} from "./helpers/postman-header.generator";
 import {postmanResponseGenerator} from "./helpers/postman-response.generator";
-import {splitCamelCase, ucfirst} from "../helpers/str";
+import {splitCamelCase, ucfirst} from "../utils/str";
 import {postmanDescriptionGenerator} from "./helpers/postman-description.generator";
 
 export class Postman {

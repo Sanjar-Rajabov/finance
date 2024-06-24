@@ -1,7 +1,7 @@
 import express, {Request, Response, Router} from "express"
 import {walletRouter} from "./frontend/wallet.router";
 import {errorHandler} from "../http/middleware/error.handler";
-import {ResponseHelper} from "../helpers/response.helper";
+import {ResponseHelper} from "../utils/response.helper";
 
 export function api(app: Router) {
   app.use(express.json());

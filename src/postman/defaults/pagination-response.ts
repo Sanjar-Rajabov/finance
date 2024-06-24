@@ -1,4 +1,4 @@
-import {ResponseHelper} from "../../helpers/response.helper";
+import {ResponseHelper} from "../../utils/response.helper";
 import {Response} from "../decorators/response";
 import {StatusCodes} from "http-status-codes";
 

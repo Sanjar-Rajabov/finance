@@ -1,7 +1,7 @@
 import e from "express";
 import "reflect-metadata"
 import db from "./database/data-source";
-import env from "./helpers/env";
+import env from "./utils/env";
 import {seed} from "./database/seeders";
 import {router} from "./routes";
 

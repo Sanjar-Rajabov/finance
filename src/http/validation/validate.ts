@@ -1,5 +1,5 @@
 import Joi from "joi";
-import env from "../../helpers/env";
+import env from "../../utils/env";
 import {ErrorMessages} from "../../errors/error-messages";
 import {BaseError} from "../../errors/base.error";
 import {StatusCodes} from "http-status-codes";

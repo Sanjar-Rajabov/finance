@@ -1,5 +1,5 @@
 import {DataSource} from "typeorm";
-import env from "../helpers/env";
+import env from "../utils/env";
 
 const db: DataSource = new DataSource({
   type: "postgres",

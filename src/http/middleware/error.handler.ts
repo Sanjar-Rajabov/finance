@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
-import {ResponseHelper} from "../../helpers/response.helper";
+import {ResponseHelper} from "../../utils/response.helper";
 import {EntityNotFoundError} from "typeorm";
-import env from "../../helpers/env";
+import env from "../../utils/env";
 import {StatusCodes} from "http-status-codes";
 
 export const errorHandler = (

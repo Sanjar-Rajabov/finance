@@ -2,8 +2,8 @@ import {NextFunction, Request, Response} from "express";
 import {Folder} from "../../postman/decorators/folder";
 import {Postman} from "../../postman/postman";
 import {Get} from "../../postman/decorators/methods";
-import env from "../../helpers/env";
-import {formatDate} from "../../helpers/date";
+import env from "../../utils/env";
+import {formatDate} from "../../utils/date";
 
 @Folder('Postman', 'postman')
 export default class PostmanController {

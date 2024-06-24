@@ -1,5 +1,5 @@
 import {ValueTransformer} from "typeorm";
-import {formatDate} from "../../helpers/date";
+import {formatDate} from "../../utils/date";
 
 export const dateIsoToDatetime: ValueTransformer = {
   to: (entityValue: number) => entityValue,

@@ -1,4 +1,4 @@
-import env from "../../helpers/env";
+import env from "../../utils/env";
 
 export async function seed() {
   // call seeders
