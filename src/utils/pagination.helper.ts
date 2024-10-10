@@ -1,3 +1,5 @@
+import {PaginationRequest} from "../http/requests/common-requests";
+
 export interface Pagination {
   current: number;
   previous: number;
@@ -36,4 +38,8 @@ export const getPaginationResponse = function <T>(data: T[], page: number, limit
   responseBody.pagination.previous = (page > 1) ? page - 1 : 0;
   responseBody.pagination.next = (total_count >= page * limit) ? page + 1 : 0;
   return responseBody;
+}
+
+export function getPaginationParams(params: PaginationRequest) {
+  return [+(params.page ?? 1), +(params.limit ?? 20)]
 }

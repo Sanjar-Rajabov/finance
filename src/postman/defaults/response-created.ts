@@ -7,7 +7,7 @@ export function ResponseCreated(body: any = null) {
     statusCode: StatusCodes.CREATED,
     body: {
       statusCode: StatusCodes.CREATED,
-      statusDesc: getReasonPhrase(StatusCodes.CREATED),
+      statusDescription: getReasonPhrase(StatusCodes.CREATED),
       data: body
     }
   }])

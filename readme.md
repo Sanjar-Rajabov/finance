@@ -2,7 +2,7 @@
 
 ## Description
 
-Typescript starter kit based on express.js
+Typescript starter kit for backend based on express.js
 
 ## Scripts
 

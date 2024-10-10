@@ -11,7 +11,7 @@ export function ResponseOk(body: any = null, wrap: boolean = true) {
   if (wrap) {
     result.body = {
       statusCode: StatusCodes.OK,
-      statusDesc: getReasonPhrase(StatusCodes.OK),
+      statusDescription: getReasonPhrase(StatusCodes.OK),
       data: body
     }
   }
