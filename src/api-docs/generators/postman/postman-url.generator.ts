@@ -1,8 +1,8 @@
 import {getMetadata} from "reflect-metadata/no-conflict";
-import {MetadataKeys} from "../enums/metadata-keys";
-import {getData} from "./get-data";
+import {MetadataKeys} from "../../enums/metadata-keys";
+import {getData} from "../../helpers/get-data";
 
-export function postmanUrlGenerator(target: any, key: string, folderName?: string) {
+export function postmanUrlGenerator(target: any, key: string) {
   let prefix = getMetadata(MetadataKeys.Prefix, target)
   let path = getData(MetadataKeys.Path, target, key)
   let params = getData(MetadataKeys.Params, target, key)
@@ -12,17 +12,9 @@ export function postmanUrlGenerator(target: any, key: string, folderName?: strin
   path = path.split('/').filter((item: string) => item !== '').join('/')
 
   let url = `/${prefix}/${path}`
-
-  if (folderName) {
-    url = `/${folderName.toLowerCase()}/${prefix}/${path}`
-  }
-
   let paths = url.split('/').filter((item: string) => item !== '')
-
   let baseUrl = `{{baseUrl}}`;
-
   let raw = `${baseUrl}${url}`
-
   let variable = []
   let query = []
 

@@ -23,6 +23,7 @@ db.initialize()
 app.listen(port, () => {
   console.log(`[server]: Server is running at ${url}`);
   if (env('APP_ENV') === 'local') {
-    console.log(`[server]: Get postman collection at ${url}/postman/generate-collection`)
+    console.log(`[server]: Get postman collection at ${url}/api-docs/postman`)
+    console.log(`[server]: Swagger at ${url}/api-docs/swagger`)
   }
 })

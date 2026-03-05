@@ -7,11 +7,13 @@ export function routeBinder(method: string) {
     headers?: object
   }) {
     return function (target: any, key: string) {
-      Reflect.defineMetadata(key + '.' + MetadataKeys.Path, path, target)
+      Reflect.defineMetadata(key + '.' + MetadataKeys.Path, path.charAt(0) === '/' ? path : '/' + path, target)
       Reflect.defineMetadata(key + '.' + MetadataKeys.Method, method, target)
 
       if (options?.params) {
         Reflect.defineMetadata(key + '.' + MetadataKeys.Params, options.params, target)
+      } else if (path.includes(':id')) {
+        Reflect.defineMetadata(key + '.' + MetadataKeys.Params, {id: 1}, target)
       }
       if (options?.query) {
         Reflect.defineMetadata(key + '.' + MetadataKeys.Query, options.query, target)

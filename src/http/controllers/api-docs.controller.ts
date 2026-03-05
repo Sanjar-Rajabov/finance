@@ -1,15 +1,16 @@
 import {NextFunction, Request, Response} from "express";
-import {Folder} from "../../postman/decorators/folder";
-import {Postman} from "../../postman/postman";
-import {Get} from "../../postman/decorators/methods";
 import env from "../../utils/env";
 import {formatDate} from "../../utils/date";
+import swaggerUi from "swagger-ui-express";
+import {Folder} from "../../api-docs/decorators/folder";
+import {Get} from "../../api-docs/decorators/methods";
+import {Postman} from "../../api-docs/postman";
+import Swagger from "../../api-docs/swagger";
 
-@Folder('Postman', 'postman')
-export default class PostmanController {
-
-  @Get('generate-collection')
-  static async generateCollection(req: Request, res: Response, next: NextFunction) {
+@Folder('API Docs', 'api-docs')
+export default class ApiDocsController {
+  @Get('postman')
+  static async postman(req: Request, res: Response, next: NextFunction) {
     try {
       const result = {
         collection: {
@@ -32,10 +33,20 @@ export default class PostmanController {
 
       await Postman.generate('./src/http/controllers/', result.collection)
 
-
       return res.send(result)
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async swagger(req: any, res: any) {
+    try {
+      const result: object = await new Swagger().setup(env('APP_NAME'))
+
+      return res.send(swaggerUi.generateHTML(result))
+    } catch (error: any) {
+      console.log(error)
+      return
     }
   }
 }

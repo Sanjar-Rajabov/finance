@@ -5,9 +5,10 @@ import {dashboard} from "./dashboard";
 import {ResponseHelper} from "../utils/response.helper";
 import {errorHandler} from "../http/middleware/error.handler";
 import env from "../utils/env";
-import PostmanController from "../http/controllers/postman.controller";
+import ApiDocsController from "../http/controllers/api-docs.controller";
 import {frontend} from "./frontend";
 import {localeMiddleware} from "../http/middleware/locale.middleware";
+import swaggerUi from "swagger-ui-express"
 
 export function router(app: e.Router): e.Router {
   app.use(express.json())
@@ -19,7 +20,9 @@ export function router(app: e.Router): e.Router {
   app.use('/frontend/', frontend(e.Router()))
 
   if (env('APP_ENV') === 'local') {
-    app.get('/postman/generate-collection', PostmanController.generateCollection)
+    app.get('/api-docs/postman', ApiDocsController.postman)
+    app.use('/api-docs/swagger', swaggerUi.serve)
+    app.get('/api-docs/swagger', ApiDocsController.swagger)
   }
 
   app.use((req: Request, res: Response, next) => {

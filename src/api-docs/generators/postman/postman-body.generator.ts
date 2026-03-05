@@ -1,6 +1,6 @@
-import {getData} from "./get-data";
-import {MetadataKeys} from "../enums/metadata-keys";
-import {BodyModes} from "../enums/body-modes";
+import {getData} from "../../helpers/get-data";
+import {MetadataKeys} from "../../enums/metadata-keys";
+import {BodyModes} from "../../enums/body-modes";
 
 export function postmanBodyGenerator(target: any, key: string) {
   let mode = getData(MetadataKeys.BodyMode, target, key)

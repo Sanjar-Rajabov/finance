@@ -10,26 +10,25 @@ import {
   ValidatedParamsRequest,
   ValidatedQueryRequest
 } from "../../requests/common-requests";
-import {Delete, Get, Post, Put} from "../../../postman/decorators/methods";
-import {Folder} from "../../../postman/decorators/folder";
-import {AuthBearer} from "../../../postman/decorators/auth-bearer";
-import {Body} from "../../../postman/decorators/body";
-import {PaginationQuery} from "../../../postman/defaults/pagination-query";
+import {Delete, Get, Post, Put} from "../../../api-docs/decorators/methods";
+import {Folder} from "../../../api-docs/decorators/folder";
+import {AuthBearer} from "../../../api-docs/decorators/auth-bearer";
+import {Body} from "../../../api-docs/decorators/body";
+import {PaginationQuery} from "../../../api-docs/defaults/pagination-query";
 import {WalletDto} from "../../../structures/dto/wallet.dto";
-import {PaginationResponse} from "../../../postman/defaults/pagination-response";
-import {ResponseOk} from "../../../postman/defaults/response-ok";
-import {ResponseCreated} from "../../../postman/defaults/response-created";
-import {ResponseEmpty} from "../../../postman/defaults/response-empty";
-import {Description} from "../../../postman/decorators/description";
+import {PaginationResponse} from "../../../api-docs/defaults/pagination-response";
+import {ResponseOk} from "../../../api-docs/defaults/response-ok";
+import {ResponseCreated} from "../../../api-docs/defaults/response-created";
+import {ResponseEmpty} from "../../../api-docs/defaults/response-empty";
+import {Description} from "../../../api-docs/decorators/description";
 import {validate} from "../../validation/validate";
 import {getOneValidation, paginationValidation} from "../../validation/common-validations";
 import {walletValidation} from "../../validation/wallet";
 
-@Folder('Wallet')
+@Folder('Wallet', '/api/wallet')
 @AuthBearer()
 @Description('test folder desc')
 export default class WalletController {
-
   @Get('/')
   @PaginationQuery()
   @PaginationResponse(new WalletDto)
@@ -87,7 +86,7 @@ export default class WalletController {
   @Body({
     name: 'wallet 1',
     balance: 0
-  }, 'formdata')
+  }, 'raw')
   @ResponseOk(new WalletDto)
   static async update(req: ValidatedBodyRequest<WalletUpdateRequest>, res: Response) {
     try {
