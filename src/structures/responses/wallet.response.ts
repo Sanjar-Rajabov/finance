@@ -1,6 +1,4 @@
-import {DTO} from "./DTO";
-
-export class WalletDto implements DTO {
+export class WalletResponse {
   id: number = 1
   name: string = 'wallet 1'
   balance: number = 0

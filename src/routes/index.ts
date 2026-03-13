@@ -1,12 +1,10 @@
 import e from "express";
 import express, {Request, Response} from "express";
 import {api} from "./api";
-import {dashboard} from "./dashboard";
 import {ResponseHelper} from "../utils/response.helper";
 import {errorHandler} from "../http/middleware/error.handler";
 import env from "../utils/env";
 import ApiDocsController from "../http/controllers/api-docs.controller";
-import {frontend} from "./frontend";
 import {localeMiddleware} from "../http/middleware/locale.middleware";
 import swaggerUi from "swagger-ui-express"
 
@@ -16,8 +14,6 @@ export function router(app: e.Router): e.Router {
   app.use(localeMiddleware)
 
   app.use('/api/', api(e.Router()))
-  app.use('/dashboard/', dashboard(e.Router()))
-  app.use('/frontend/', frontend(e.Router()))
 
   if (env('APP_ENV') === 'local') {
     app.get('/api-docs/postman', ApiDocsController.postman)

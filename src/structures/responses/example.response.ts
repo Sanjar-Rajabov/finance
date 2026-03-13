@@ -1,4 +1,4 @@
-export class TestDto {
+export class ExampleResponse {
   constructor(
     public id: number = 1
   ) {

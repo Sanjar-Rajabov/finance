@@ -15,7 +15,7 @@ import {Folder} from "../../../api-docs/decorators/folder";
 import {AuthBearer} from "../../../api-docs/decorators/auth-bearer";
 import {Body} from "../../../api-docs/decorators/body";
 import {PaginationQuery} from "../../../api-docs/defaults/pagination-query";
-import {WalletDto} from "../../../structures/dto/wallet.dto";
+import {WalletResponse} from "../../../structures/responses/wallet.response";
 import {PaginationResponse} from "../../../api-docs/defaults/pagination-response";
 import {ResponseOk} from "../../../api-docs/defaults/response-ok";
 import {ResponseCreated} from "../../../api-docs/defaults/response-created";
@@ -31,7 +31,7 @@ import {walletValidation} from "../../validation/wallet";
 export default class WalletController {
   @Get('/')
   @PaginationQuery()
-  @PaginationResponse(new WalletDto)
+  @PaginationResponse(new WalletResponse)
   @Description('test method desc')
   static async getAll(req: ValidatedQueryRequest<PaginationRequest>, res: Response) {
     try {
@@ -46,7 +46,7 @@ export default class WalletController {
   }
 
   @Get('/:id')
-  @ResponseOk(new WalletDto)
+  @ResponseOk(new WalletResponse)
   static async getOne(req: ValidatedParamsRequest<GetOneRequest>, res: Response) {
     try {
       validate(getOneValidation, req.params)
@@ -68,7 +68,7 @@ export default class WalletController {
     name: 'wallet 1',
     balance: 0
   })
-  @ResponseCreated(new WalletDto())
+  @ResponseCreated(new WalletResponse())
   static async create(req: ValidatedBodyRequest<WalletCreateRequest>, res: Response) {
     try {
       validate(walletValidation, req.body)
@@ -87,7 +87,7 @@ export default class WalletController {
     name: 'wallet 1',
     balance: 0
   }, 'raw')
-  @ResponseOk(new WalletDto)
+  @ResponseOk(new WalletResponse)
   static async update(req: ValidatedBodyRequest<WalletUpdateRequest>, res: Response) {
     try {
       validate(walletValidation, req.body)

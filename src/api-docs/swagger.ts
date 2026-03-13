@@ -33,9 +33,7 @@ export default class Swagger {
 
     result.tags = await this.generateTags(options?.controllersPath || defaultControllersPath)
     result.paths = await this.generatePaths(options?.controllersPath || defaultControllersPath)
-    result.components = await this.generateComponents(options?.DTOsPath || path.join(process.cwd(), '/src/structures/dto'))
-
-    console.log(result)
+    result.components = await this.generateComponents(options?.DTOsPath || path.join(process.cwd(), '/src/structures/responses'))
 
     return result
   }

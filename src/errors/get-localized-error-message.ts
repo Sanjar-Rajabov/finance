@@ -1,6 +1,6 @@
 import * as messages from './messages'
 import {Locale} from "../structures/locale";
-import {getAppLocale} from "../config/locale";
+import {getAppLocale} from "../utils/locale";
 
 export function getLocalizedErrorMessage(key: string, replace: {
   [key: string]: any
